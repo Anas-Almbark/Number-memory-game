@@ -9,6 +9,15 @@
   --opacity-colorBg: #424848b2;
   --main-text-color: #eee;
 }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: #535a5ab2;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--prim-color);
+}
 body {
   background: var(--main-color);
 }

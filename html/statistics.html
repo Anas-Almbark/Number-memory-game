@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/master.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/master.css" />
+    <link rel="stylesheet" href="../css/statistics.css" />
+    <title>statistics</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="side-bar">
+        <div class="box-logo">
+          <h1>Logo</h1>
+        </div>
+        <div class="nav">
+          <ul>
+            <li>
+              <a href="./home.html"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li>
+              <a href="./statistics.html" class="active"
+                ><i class="fa-solid fa-chart-simple"></i> statistics</a
+              >
+            </li>
+            <li>
+              <a href="./team.html"
+                ><i class="fa-solid fa-people-group"></i> work team</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="table-players">
+          <table>
+            <thead>
+              <tr>
+                <th>name player</th>
+                <th>count success</th>
+                <th>count wrong</th>
+                <th>total success</th>
+                <th>time play</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="box-row">
+                    <span class="sort"> 01 </span>
+                    <img src="../images/gamer.jpg" alt="photo" />
+                    <span> name player </span>
+                  </div>
+                </td>
+                <td>
+                  <span> 10 </span>
+                </td>
+                <td>
+                  <span> 7 </span>
+                </td>
+                <td>
+                  <span> 3 </span>
+                </td>
+                <td>
+                  <span>2024 / 07 / 10 12:30 pm</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="charts-players"></div>
+      </div>
+    </div>
+
+    <script src="../js/statistics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+  </body>
+</html>

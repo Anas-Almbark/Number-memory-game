@@ -1,0 +1,49 @@
+.main-content {
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.table-players::-webkit-scrollbar {
+  width: 4px;
+}
+.table-players {
+  height: calc(90% / 2);
+  overflow-y: auto;
+}
+.table-players table {
+  width: 100%;
+  text-align: center;
+  color: var(--main-text-color);
+  font-size: 18px;
+}
+.table-players table thead th {
+  font-size: 20px;
+  padding: 20px 0;
+  background-color: var(--prim-color);
+  color: var(--main-text-color);
+  border-bottom: 2px solid var(--main-text-color);
+}
+.table-players table tbody tr td {
+  padding: 20px 0;
+  border-bottom: 2px solid var(--main-text-color);
+}
+.table-players table tbody tr .box-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table-players table tbody tr td .sort {
+  font-size: 24px;
+  margin: 0 10px;
+}
+.table-players table tbody tr td img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin: 0 10px;
+}
+.charts-players {
+  background-color: aquamarine;
+}

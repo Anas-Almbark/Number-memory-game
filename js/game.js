@@ -12,6 +12,7 @@ const memoryNumbers = document.getElementById("memoryNumbers");
 const guessInput = document.getElementById("guessInput");
 const tryBtn = document.getElementById("try-btn");
 const formGuess = document.getElementById("gameForm");
+const endGame = document.querySelector(".endGame");
 //? Player information
 let Player = [];
 
@@ -56,12 +57,7 @@ wayPlaying();
 //TODO: Function to start game based on selected mode
 function startGame() {
   if (!gameStarted) {
-    const gameMode = getSelectedGameMode();
-    gameMode === 1
-      ? displayStartMessage()
-      : gameMode === 2
-      ? startLimitedAttemptsGame()
-      : 0;
+    displayStartMessage();
   }
   gameStarted = true;
   boxInfoGame.classList.add("displayed");
@@ -74,15 +70,24 @@ function startTimedGame() {
   startCountdown(durationInSeconds);
   countdownDisplay.style.display = "block";
   document.querySelector(".start-game").style.display = "block";
+
+  setTimeout(() => {
+    stopGameAndRedirect();
+  }, durationInSeconds * 1000);
 }
 
 //TODO: Function to start limited attempts game
 function startLimitedAttemptsGame() {
   const numberAttempts = parseInt(numberInput.value);
-  for (let i = 0; i < numberAttempts; i++) {
+  let i = 0;
+  for (i = 0; i < numberAttempts; i++) {
     displayRandomNumbers();
   }
-  displayStartMessage();
+  setTimeout(() => {
+    if (i == numberAttempts) {
+      stopGameAndRedirect();
+    }
+  }, 1000);
 }
 
 //TODO: Function to toggle game mode UI
@@ -223,7 +228,9 @@ function displayStartMessage() {
     if (countdown === 0) {
       clearInterval(countdownInterval);
       startMessageElement.remove();
-      startTimedGame();
+      getSelectedGameMode() == 1
+        ? startTimedGame()
+        : startLimitedAttemptsGame();
     } else {
       startMessageElement.textContent = `Starting in ${countdown}...`;
       countdown--;
@@ -271,6 +278,12 @@ function showPlayerInfo() {
     console.error("playerInfoContainer is null");
   }
 }
+
+function stopGameAndRedirect() {
+  gameStarted = false;
+  endGame.classList.add("active");
+}
+
 window.onload = () => {
   localStorage.length > 0
     ? (Player = JSON.parse(localStorage.getItem("players")))
