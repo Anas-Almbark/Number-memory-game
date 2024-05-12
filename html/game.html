@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/master.css" />
+    <link rel="stylesheet" href="../css/game.css" />
+    <title>Memory Game</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="info-game">
+        <form class="gameInfo">
+          <input
+            type="text"
+            id="name-player"
+            placeholder="Enter Your Name"
+            max="30"
+            min="1"
+            required
+          />
+          <div class="way-play">
+            <div class="row">
+              <input
+                type="radio"
+                id="Period"
+                name="way-play"
+                required
+                checked
+              />
+              <label for="Period" class="way-play-label">Period of time</label>
+              <input type="radio" id="number" name="way-play" required />
+              <label for="number" class="way-play-label">number of times</label>
+            </div>
+            <input
+              type="text"
+              id="periodInput"
+              placeholder="Enter period (hours and minutes)"
+              required
+            />
+            <input
+              type="text"
+              id="numberInput"
+              placeholder="Enter number of times"
+              style="display: none"
+            />
+          </div>
+          <input type="submit" value="Start" />
+        </form>
+      </div>
+      <div class="start-game" style="display: none">
+        <div class="header">
+          <div class="info"></div>
+          <div class="time-try" id="time-try">
+            <h1>4:31</h1>
+          </div>
+        </div>
+        <div class="content">
+          <form id="gameForm">
+            <div id="memoryNumbers"></div>
+            <div class="box-guess">
+              <input
+                type="text"
+                id="guessInput"
+                placeholder="Enter the numbers"
+                style="display: none"
+                required
+              />
+              <button type="submit" id="try-btn" style="display: none">
+                Try
+              </button>
+            </div>
+            <div class="msg"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../js/game.js"></script>
+  </body>
+</html>
