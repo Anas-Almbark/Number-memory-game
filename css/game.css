@@ -68,6 +68,13 @@ body {
   color: var(--main-text-color);
   cursor: pointer;
 }
+.container .info-game a {
+  display: block;
+  background-color: var(--main-text-color);
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--opacity-colorBg);
+}
 .container .start-game {
   width: 100%;
 }

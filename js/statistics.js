@@ -1,4 +1,5 @@
 let players = [];
+//TODO: to get data players from local storage
 function getDataFromStorage() {
   localStorage.length > 0
     ? (players = JSON.parse(localStorage.getItem("players")))
@@ -7,6 +8,7 @@ function getDataFromStorage() {
 }
 getDataFromStorage();
 
+//TODO: to set info players in tables (after get from local storage)
 function setDataInTable() {
   let tbody = document.querySelector(".table-players table tbody");
   players.forEach((e) => {

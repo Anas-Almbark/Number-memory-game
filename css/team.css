@@ -1,0 +1,67 @@
+.main-content {
+  padding: 30px;
+  width: 100%;
+}
+.main-content .cards {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: 1fr;
+  grid-gap: 50px;
+}
+.main-content .cards .card {
+  position: relative;
+  background-color: var(--opacity-colorBg);
+  border-radius: 8px;
+  padding-top: 20px;
+  border: 2px solid var(--prim-color);
+}
+
+.main-content .cards .card::before {
+  content: "Student";
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 10px;
+  background-color: var(--prim-color);
+  color: var(--main-text-color);
+}
+.main-content .cards .card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.main-content .cards .card .info-member h2 {
+  padding: 10px;
+  background-color: var(--prim-color);
+  color: var(--main-text-color);
+}
+.main-content .cards .card:last-of-type {
+  border-color: #ffd700;
+}
+.main-content .cards .card:last-of-type::before {
+  content: "supervisor";
+  background-color: #ffd700;
+  color: var(--main-color);
+}
+.main-content .cards .card:last-of-type .info-member h2 {
+  background-color: #ffd700;
+  color: var(--main-color);
+}
+
+@media screen and (max-width: 767px) {
+  .main-content .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  .main-content .cards .card::before {
+    left: 0;
+    top: 0;
+  }
+  .main-content .cards .card .info-member h2 {
+    font-size: 22px;
+  }
+}
