@@ -8,7 +8,7 @@
   width: 4px;
 }
 .table-players {
-  height: calc(90% / 2);
+  height: 50vh;
   overflow-y: auto;
 }
 .table-players table {
@@ -28,22 +28,25 @@
   padding: 20px 0;
   border-bottom: 2px solid var(--main-text-color);
 }
-.table-players table tbody tr .box-row {
+
+.charts-players:has(> .hasData) {
+  height: 50vh;
+  background-color: var(--opacity-colorBg);
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin: 40px 0 20px;
 }
-.table-players table tbody tr td .sort {
-  font-size: 24px;
-  margin: 0 10px;
+.charts-players:not(:has(> .hasData)) {
+  display: none;
 }
-.table-players table tbody tr td img {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin: 0 10px;
-}
-.charts-players {
-  background-color: aquamarine;
+@media screen and (max-width: 500px) {
+  .main-content {
+    padding: 10px;
+  }
+  .table-players
+    table
+    :where(thead, tbody)
+    :where(th:is(.displayed-mobile), td:is(.displayed-mobile)) {
+    display: none;
+  }
 }

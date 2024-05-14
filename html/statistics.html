@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/master.css" />
     <link rel="stylesheet" href="../css/statistics.css" />
     <title>statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="container">
@@ -46,8 +47,8 @@
             <thead>
               <tr>
                 <th>name player</th>
-                <th>count success</th>
-                <th>count wrong</th>
+                <th class="displayed-mobile">count success</th>
+                <th class="displayed-mobile">count wrong</th>
                 <th>total success</th>
                 <th>time play</th>
               </tr>
@@ -55,10 +56,11 @@
             <tbody></tbody>
           </table>
         </div>
-        <div class="charts-players"></div>
+        <div class="charts-players">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
       </div>
     </div>
     <script src="../js/statistics.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
   </body>
 </html>

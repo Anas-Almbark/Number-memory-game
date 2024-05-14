@@ -101,12 +101,15 @@ body {
   margin: 40px 0;
 }
 .container .start-game .content {
-  width: 50%;
   min-height: 70vh;
   margin: auto;
 }
-.container .start-game .content form .box-guess {
+.container .start-game .content form {
   width: 100%;
+}
+.container .start-game .content form .box-guess {
+  width: 50%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +155,6 @@ body {
 .container .start-game .content form .msg h3 {
   margin: 4px 10px;
 }
-
 .container .endGame {
   position: absolute;
   left: 0px;
@@ -171,7 +173,7 @@ body {
 }
 .container .endGame .box {
   background-color: var(--main-text-color);
-  width: 30%;
+  width: 40%;
   padding: 20px 10px;
   border-radius: 6px;
 }
@@ -196,4 +198,39 @@ body {
 }
 .container .endGame .box .links a:nth-child(2) {
   background-color: var(--prim-color);
+}
+
+@media screen and (max-width: 767px) {
+  .container .info-game {
+    width: 90vw;
+  }
+  .container .start-game .content form .box-guess {
+    width: 80%;
+  }
+  .container .endGame .box {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .container .info-game .way-play-label {
+    padding: 8px;
+    font-size: 16px;
+  }
+  .container .start-game .header {
+    display: block;
+  }
+  .container .start-game .content form .box-guess {
+    display: block;
+    justify-content: center;
+  }
+  .container .start-game .content .box-guess :where(input, button) {
+    width: 100%;
+  }
+  .container .endGame .box .links {
+    display: block;
+  }
+  .container .endGame .box .links a {
+    width: 85%;
+    margin: 10px 0;
+  }
 }
