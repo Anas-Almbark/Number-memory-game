@@ -8,7 +8,7 @@ body {
   text-align: center;
 }
 .container .time-start {
-  font-size: 12rem;
+  font-size: 5rem;
   color: var(--prim-color);
   text-shadow: 0 10px 45px var(--prim-color);
 }
@@ -94,6 +94,34 @@ body {
   background-color: var(--prim-color);
   color: var(--main-text-color);
   margin: 20px;
+}
+.container .start-game .header .fervor {
+  position: absolute;
+  bottom: 100px;
+  left: 50px;
+  font-size: 5rem;
+  color: var(--prim-color);
+}
+.container .start-game .header .fervor:not(:is([data-fervor])) {
+  display: none;
+}
+.container .start-game .header .fervor::before {
+  content: attr(data-fervor);
+  position: absolute;
+  color: var(--prim-color);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: var(--opacity-colorBg);
+  box-shadow: 0 0 59px #ef4256f0, 0 0 89px #ef4256f0, 0 0 99px #de727ff0;
+  z-index: -1;
 }
 .container .start-game .content #memoryNumbers {
   font-size: 4rem;

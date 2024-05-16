@@ -20,6 +20,10 @@ let Player = [];
 let gameStarted = false;
 let numberOfNumbers = 3; //! limit of numbers to generate
 
+//? To calculate consecutive wins
+let fervor = 0;
+let testerFervor = true;
+
 let numberSuccesses = 0,
   numberFailures = 0,
   totalSuccess = numberSuccesses - numberFailures;
@@ -34,6 +38,7 @@ form.addEventListener("submit", (e) => {
     numberFailures: numberFailures,
     totalSuccess: totalSuccess,
     time: nowDate,
+    fervor: fervor,
   });
 });
 
@@ -72,7 +77,7 @@ function startTimedGame() {
   document.querySelector(".start-game").style.display = "block";
 
   setTimeout(() => {
-    stopGameAndRedirect();
+    stopGame();
   }, durationInSeconds * 1000);
 }
 
@@ -85,7 +90,7 @@ function startLimitedAttemptsGame() {
   }
   setTimeout(() => {
     if (i == numberAttempts) {
-      stopGameAndRedirect();
+      stopGame();
     }
   }, 1000);
 }
@@ -203,11 +208,13 @@ function updateGame(success) {
     Player[Player.length - 1].numberSuccesses++;
     showMessage("Success Guess", 1);
     numberOfNumbers <= 15 ? numberOfNumbers++ : numberOfNumbers;
+    checkFervor(success);
   } else {
     failSound.play();
     Player[Player.length - 1].numberFailures++;
     showMessage("Wrong Guess", 0);
     numberOfNumbers <= 3 ? numberOfNumbers : numberOfNumbers--;
+    checkFervor(success);
   }
   Player[Player.length - 1].totalSuccess =
     Player[Player.length - 1].numberSuccesses -
@@ -216,11 +223,26 @@ function updateGame(success) {
   showPlayerInfo();
 }
 
+//TODO: This function regulates fervor
+function checkFervor(success) {
+  let eleFervor = document.querySelector(".fervor");
+  if (testerFervor && success) {
+    fervor++;
+    Player[Player.length - 1].fervor++;
+    eleFervor.setAttribute("data-fervor", fervor);
+  } else {
+    fervor = 0;
+    Player[Player.length - 1].fervor = 0;
+    eleFervor.removeAttribute("data-fervor");
+  }
+}
+
 //TODO: Function to display start message
 function displayStartMessage() {
   let countdown = 3;
   const startMessageElement = document.createElement("h1");
-  startMessageElement.textContent = "Get ready!";
+  startMessageElement.textContent = "Get ready";
+  startMessageElement.className = "time-start";
   container.appendChild(startMessageElement);
 
   //? Start a countdown to the beginning of the game
@@ -241,8 +263,9 @@ function displayStartMessage() {
 //TODO: Function to display message
 function showMessage(title, status) {
   const messageElement = document.createElement("div");
+  messageElement.className = "msg";
   const titleElement = document.createElement("h3");
-  titleElement.textContent = title;
+  titleElement.innerText = title;
   const icon = document.createElement("i");
   status
     ? (icon.className = "fa-solid fa-circle-check")
@@ -250,7 +273,7 @@ function showMessage(title, status) {
   messageElement.appendChild(titleElement);
   messageElement.appendChild(icon);
 
-  boxInfoGame.appendChild(messageElement);
+  formGuess.appendChild(messageElement);
   setTimeout(() => {
     messageElement.remove();
   }, 1000);
@@ -279,7 +302,7 @@ function showPlayerInfo() {
   }
 }
 
-function stopGameAndRedirect() {
+function stopGame() {
   gameStarted = false;
   endGame.classList.add("active");
 }

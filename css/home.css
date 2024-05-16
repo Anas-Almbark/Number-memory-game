@@ -1,6 +1,6 @@
 .main-content {
-  width: 100%;
   padding: 20px 50px;
+  width: 100%;
 }
 .main-content .box-search {
   padding: 40px 0;
@@ -43,11 +43,6 @@
 }
 .main-content .cards .card:hover .card-info {
   height: 100%;
-  transition: 0.4s ease-in-out;
-}
-.main-content .cards .card:not(:hover) .card-info {
-  height: 0%;
-  transition: 0.2s ease-in-out;
 }
 .main-content .cards .card .card-info {
   position: absolute;
@@ -56,8 +51,21 @@
   width: 100%;
   height: 0%;
   overflow: hidden;
-  background: #da3341cd;
+  background-color: #da3341cd;
   z-index: 1;
+  transition: 0.3s ease-in-out;
+}
+.main-content .cards .card:hover .card-info::before {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+  transform: translateX(-50%);
+  font-size: 25px;
+  color: var(--main-text-color);
 }
 .main-content .cards .card .card-info i {
   position: absolute;
@@ -79,9 +87,8 @@
   border: 2px solid var(--main-text-color);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  line-height: 100px;
 }
 .main-content .cards .card .card-info a i:hover {
   background-color: var(--main-text-color);
@@ -93,13 +100,13 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media screen and (max-width: 767px) {
   .main-content {
     padding: 20px 30px;
   }
-  .main-content .box-search {
-    display: flex;
-    justify-content: center;
+  .main-content .box-search form {
+    margin: auto;
   }
   .main-content .box-search form input {
     padding: 20px;
