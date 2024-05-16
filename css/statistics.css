@@ -3,6 +3,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .table-players::-webkit-scrollbar {
   width: 4px;
@@ -28,17 +29,25 @@
   padding: 20px 0;
   border-bottom: 2px solid var(--main-text-color);
 }
-
 .charts-players:has(> .hasData) {
-  height: 50vh;
   background-color: var(--opacity-colorBg);
-  display: flex;
-  justify-content: center;
   margin: 40px 0 20px;
+  padding: 30px 0;
 }
 .charts-players:not(:has(> .hasData)) {
   display: none;
 }
+.charts-players canvas {
+  width: 100%;
+  margin: 50px;
+  max-height: 40vh;
+}
+
+.charts-players canvas:last-of-type {
+  padding: 20px 0;
+  border-top: 10px solid var(--opacity-colorBg);
+}
+
 @media screen and (max-width: 500px) {
   .main-content {
     padding: 10px;

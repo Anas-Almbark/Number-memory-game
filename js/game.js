@@ -18,11 +18,13 @@ let Player = [];
 
 //? Variable to track whether the game has started
 let gameStarted = false;
-let numberOfNumbers = 3; //! limit of numbers to generate
+let limit = 3; //! limit of numbers to generate
 
 //? To calculate consecutive wins
 let fervor = 0;
 let testerFervor = true;
+
+let selectedGameMode;
 
 let numberSuccesses = 0,
   numberFailures = 0,
@@ -52,18 +54,18 @@ formGuess.addEventListener("submit", (e) => {
 function wayPlaying() {
   periodRadio.addEventListener("change", () => {
     toggleGameMode(1);
+    getSelectedGameMode();
   });
   numberRadio.addEventListener("change", () => {
     toggleGameMode(2);
+    getSelectedGameMode();
   });
 }
 wayPlaying();
 
 //TODO: Function to start game based on selected mode
 function startGame() {
-  if (!gameStarted) {
-    displayStartMessage();
-  }
+  !gameStarted && displayStartMessage();
   gameStarted = true;
   boxInfoGame.classList.add("displayed");
 }
@@ -82,17 +84,12 @@ function startTimedGame() {
 }
 
 //TODO: Function to start limited attempts game
-function startLimitedAttemptsGame() {
-  const numberAttempts = parseInt(numberInput.value);
-  let i = 0;
-  for (i = 0; i < numberAttempts; i++) {
-    displayRandomNumbers();
-  }
-  setTimeout(() => {
-    if (i == numberAttempts) {
-      stopGame();
-    }
-  }, 1000);
+function startLimitedGame() {
+  let n = numberInput.value;
+  countdownDisplay.innerText = `${n <= 0 ? "Time Up" : n--}`;
+  countdownDisplay.style.display = "block";
+  displayRandomNumbers();
+  document.querySelector(".start-game").style.display = "block";
 }
 
 //TODO: Function to toggle game mode UI
@@ -116,9 +113,13 @@ function toggleGameMode(mode) {
 
 //TODO: Function to get selected game mode
 function getSelectedGameMode() {
-  return periodRadio.checked ? 1 : 2;
+  if (periodRadio.checked) {
+    selectedGameMode = 1;
+  } else if (numberRadio.checked) {
+    selectedGameMode = 2;
+  }
 }
-
+getSelectedGameMode();
 //TODO: Function to convert period to seconds
 function convertToSeconds(period) {
   const [hours, minutes, seconds] = period.split(":");
@@ -131,7 +132,7 @@ function startCountdown(durationInSeconds) {
   const countdownInterval = setInterval(() => {
     if (timeLeft <= 0) {
       clearInterval(countdownInterval);
-      countdownDisplay.innerText = "Time's up!";
+      countdownDisplay.innerText = "Time's up";
     } else {
       const hours = Math.floor(timeLeft / 3600);
       const minutes = Math.floor((timeLeft % 3600) / 60);
@@ -147,7 +148,7 @@ function displayRandomNumbers() {
   let numbersToRemember = [];
   memoryNumbers.innerText = "";
   const displayDuration = 1000;
-  for (let i = 0; i < numberOfNumbers; i++) {
+  for (let i = 0; i < limit; i++) {
     const randomNumber = Math.floor(Math.random() * 10);
     const color = getRandomColor();
     const numberElement = document.createElement("span");
@@ -182,6 +183,9 @@ function handleTry() {
   checkGuess(userGuess, numbersToRemember)
     ? updateGame(true)
     : updateGame(false);
+  if (selectedGameMode == 2) {
+    --numberInput.value <= 0 ? stopGame() : startLimitedGame();
+  }
 }
 
 //TODO: Function to get numbers to remember
@@ -207,13 +211,13 @@ function updateGame(success) {
     successSound.play();
     Player[Player.length - 1].numberSuccesses++;
     showMessage("Success Guess", 1);
-    numberOfNumbers <= 15 ? numberOfNumbers++ : numberOfNumbers;
+    limit <= 15 ? limit++ : limit;
     checkFervor(success);
   } else {
     failSound.play();
     Player[Player.length - 1].numberFailures++;
     showMessage("Wrong Guess", 0);
-    numberOfNumbers <= 3 ? numberOfNumbers : numberOfNumbers--;
+    limit <= 3 ? limit : limit--;
     checkFervor(success);
   }
   Player[Player.length - 1].totalSuccess =
@@ -250,9 +254,8 @@ function displayStartMessage() {
     if (countdown === 0) {
       clearInterval(countdownInterval);
       startMessageElement.remove();
-      getSelectedGameMode() == 1
-        ? startTimedGame()
-        : startLimitedAttemptsGame();
+      selectedGameMode == 1 ? startTimedGame() : startLimitedGame();
+      console.log(selectedGameMode);
     } else {
       startMessageElement.textContent = `Starting in ${countdown}...`;
       countdown--;
@@ -301,12 +304,10 @@ function showPlayerInfo() {
     console.error("playerInfoContainer is null");
   }
 }
-
 function stopGame() {
   gameStarted = false;
   endGame.classList.add("active");
 }
-
 window.onload = () => {
   localStorage.length > 0
     ? (Player = JSON.parse(localStorage.getItem("players")))
