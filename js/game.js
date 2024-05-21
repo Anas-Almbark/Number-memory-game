@@ -120,10 +120,17 @@ function getSelectedGameMode() {
   }
 }
 getSelectedGameMode();
+
 //TODO: Function to convert period to seconds
 function convertToSeconds(period) {
   const [hours, minutes, seconds] = period.split(":");
   return parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+}
+
+// TODO: To free up the guesswork solution and focus on it
+function restInputGuess() {
+  guessInput.value = "";
+  guessInput.focus();
 }
 
 //TODO: Function to start countdown
@@ -186,6 +193,7 @@ function handleTry() {
   if (selectedGameMode == 2) {
     --numberInput.value <= 0 ? stopGame() : startLimitedGame();
   }
+  restInputGuess();
 }
 
 //TODO: Function to get numbers to remember
@@ -244,20 +252,18 @@ function checkFervor(success) {
 //TODO: Function to display start message
 function displayStartMessage() {
   let countdown = 3;
-  const startMessageElement = document.createElement("h1");
-  startMessageElement.textContent = "Get ready";
-  startMessageElement.className = "time-start";
-  container.appendChild(startMessageElement);
+  const startElement = document.createElement("h1");
+  startElement.innerText = "Get ready";
+  startElement.className = "time-start";
+  container.appendChild(startElement);
 
-  //? Start a countdown to the beginning of the game
   const countdownInterval = setInterval(() => {
     if (countdown === 0) {
       clearInterval(countdownInterval);
-      startMessageElement.remove();
+      startElement.remove();
       selectedGameMode == 1 ? startTimedGame() : startLimitedGame();
-      console.log(selectedGameMode);
     } else {
-      startMessageElement.textContent = `Starting in ${countdown}...`;
+      startElement.innerText = `Starting in ${countdown}...`;
       countdown--;
     }
   }, 1000);

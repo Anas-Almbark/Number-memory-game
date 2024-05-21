@@ -1,4 +1,5 @@
 let players = [];
+
 //TODO: to get data players from local storage
 function getDataFromStorage() {
   if (localStorage.length > 0) {
@@ -55,7 +56,7 @@ function totalSuccessChart() {
     .filter((e) => e.totalSuccess >= 0)
     .map((player) => player.totalSuccess);
   let canvas = document.getElementById("myChart").getContext("2d");
-  summaryArray.length > 0 &&
+  summaryArray.length >= 0 &&
     document.getElementById("myChart").classList.add("hasData");
   let myChart = new Chart(canvas, {
     type: "doughnut",
@@ -108,7 +109,7 @@ function fervorChart() {
     .filter((e) => e.fervor >= 0)
     .map((player) => player.fervor);
   let canvas = document.getElementById("myChart2").getContext("2d");
-  summaryArray.length > 0 &&
+  summaryArray.length >= 0 &&
     document.getElementById("myChart2").classList.add("hasData");
   let myChart = new Chart(canvas, {
     type: "bar",

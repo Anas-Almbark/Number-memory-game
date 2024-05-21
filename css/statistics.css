@@ -1,8 +1,6 @@
 .main-content {
   padding: 30px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 .table-players::-webkit-scrollbar {
@@ -52,10 +50,7 @@
   .main-content {
     padding: 10px;
   }
-  .table-players
-    table
-    :where(thead, tbody)
-    :where(th:is(.displayed-mobile), td:is(.displayed-mobile)) {
+  .table-players table :where(thead, tbody) :where(th:is(.displayed-mobile), td:is(.displayed-mobile)) {
     display: none;
   }
 }
