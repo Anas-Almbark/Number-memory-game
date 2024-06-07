@@ -1,7 +1,22 @@
 .main-content {
+  position: relative;
   padding: 30px;
   width: 100%;
   overflow: hidden;
+}
+.main-content .empty-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.main-content .empty-data:has(~ .table-players tbody:not(:empty)) {
+  display: none;
+}
+.main-content .empty-data span {
+  font-size: 3rem;
+  text-transform: capitalize;
+  color: var(--prim-color);
 }
 .table-players::-webkit-scrollbar {
   width: 4px;
@@ -27,6 +42,9 @@
   padding: 20px 0;
   border-bottom: 2px solid var(--main-text-color);
 }
+.table-players:has(tbody:empty) {
+  display: none;
+}
 .charts-players:has(> .hasData) {
   background-color: var(--opacity-colorBg);
   margin: 40px 0 20px;
@@ -50,7 +68,10 @@
   .main-content {
     padding: 10px;
   }
-  .table-players table :where(thead, tbody) :where(th:is(.displayed-mobile), td:is(.displayed-mobile)) {
+  .table-players
+    table
+    :where(thead, tbody)
+    :where(th:is(.displayed-mobile), td:is(.displayed-mobile)) {
     display: none;
   }
 }
